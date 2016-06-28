@@ -1,8 +1,8 @@
 import React from 'react'
 import { Route } from 'react-router'
 import Main from './main'
-import Test from './test'
-import Todo from './todo'
+import Test from './Test/test'
+import Todo from './Todo/todo'
 
 module.exports = (
   <Route path="/" component={Main}>
