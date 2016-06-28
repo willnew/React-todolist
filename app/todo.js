@@ -1,10 +1,17 @@
 import React from 'react'
 
 var TodoItem = React.createClass({
+  getInitialState() {
+    return { done: false }
+  },
+  onItemStatusChange(event) {
+    this.setState({done: !this.state.done})
+  },
   render() {
     return (
-      <div>
-        {this.props.itemName}
+      <div className={this.state.done ? 'done' : ''}>
+        <input type="checkbox" onChange={this.onItemStatusChange} />
+        {this.props.item.name}
       </div>
     )
   }
@@ -14,9 +21,9 @@ var TodoList = React.createClass({
   render() {
     return (
       <div>
-        <TodoItem itemName="coding"></TodoItem>
-        <TodoItem itemName="self testing"></TodoItem>
-        <TodoItem itemName="fixing bug"></TodoItem>
+        {this.props.todoItems.map(function(item) {
+          return <TodoItem key={item.id} item={item}/>
+        })}
       </div>
     )
   }
@@ -25,7 +32,11 @@ var TodoList = React.createClass({
 var TodoForm = React.createClass({
   onTodoFormSubmit(event) {
     event.preventDefault()
-    console.log(event.target.elements[0].value)
+    this.props.onTodoFormSubmit({
+      id: Date.now(),
+      name: event.target.elements[0].value
+    })
+    event.target.elements[0].value = ''
   },
   render() {
     return (
@@ -39,17 +50,17 @@ var TodoForm = React.createClass({
 })
 
 module.exports = React.createClass({
-  onTodoItemAdd() {
-
+  getInitialState: function() {
+    return {items: []};
   },
-  onTodoItemDelete() {
-
+  onTodoItemAdd(todoItem) {
+    this.setState({items: this.state.items.concat(todoItem)})
   },
   render() {
     return (
       <div>
-        <TodoList></TodoList>
-        <TodoForm></TodoForm>
+        <TodoList todoItems={this.state.items}></TodoList>
+        <TodoForm onTodoFormSubmit={this.onTodoItemAdd}></TodoForm>
       </div>
     );
   }
