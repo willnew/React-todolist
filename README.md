@@ -5,7 +5,6 @@
 * enjoy myself
 * bundler: webpack
 * TODO: 
-	* add json-server as mock server
 	* change state change into Redux workflow
 
 [![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
