@@ -4,6 +4,6 @@ import { Router, browserHistory } from 'react-router'
 import routes from './app/routes'
 
 render(
-  <Router routes={routes} history={browserHistory}/>,
+  <Router routes={routes} history={browserHistory} />,
   document.getElementById('main')
 )
