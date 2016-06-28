@@ -10,8 +10,10 @@ module.exports = React.createClass({
   render() {
     return (
       <div className={this.state.done ? 'done' : ''}>
-        <input type="checkbox" onChange={this.onItemStatusChange} />
-        {this.props.item.name}
+        <input id={this.props.item.id} type='checkbox' onChange={this.onItemStatusChange} />
+        <label htmlFor={this.props.item.id}>
+          {this.props.item.name}
+        </label>
       </div>
     )
   }
